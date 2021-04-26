@@ -1,0 +1,2 @@
+* Custom fonts
+Global userstyle that changes base font to your favorite base font.
