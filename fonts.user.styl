@@ -16,6 +16,8 @@
 
     // Exclude icon fonts.
     n += ':not([class^="fa"]):not(.i):not(.icon)'
+    n += ':not([class*="octicon-"])' // github
+    n += ':not(.glyphicon)' // searx
 
     // Exclude code areas on GitHub.
     n += ':not([class^="blob-"]):not([class^="blob-"] > span)'
