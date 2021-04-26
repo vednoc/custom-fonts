@@ -15,7 +15,7 @@
     n ?= ':not(code):not(pre):not(pre > span):not(code > span)'
 
     // Exclude icon fonts.
-    n += ':not([class^="fa"]):not(.i)'
+    n += ':not([class^="fa"]):not(.i):not(.icon)'
 
     // Exclude code areas on GitHub.
     n += ':not([class^="blob-"]):not([class^="blob-"] > span)'
