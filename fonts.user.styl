@@ -10,6 +10,7 @@
 @license      MIT
 
 @var text font 'Base font' '"your favorite base font"'
+@var checkbox inputs 'Use monospace font in input areas' 0
 ==/UserStyle== */
 
 @-moz-document regexp("https?://.*") {
@@ -31,6 +32,12 @@
 
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
+
+    // Feat -> Change base fonts in input areas.
+    if inputs {
+        n += ':not(input):not(textarea)'
+        input, textarea { font-family: monospace i }
+    }
 
     // Generate.
     { n } {
