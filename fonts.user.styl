@@ -1,0 +1,27 @@
+/* ==UserStyle==
+@name           Global serif font
+@namespace      github.com/vednoc/custom-fonts
+@version        0.1.0
+@description    Apply custom base font globally.
+@author         vednoc
+@preprocessor   stylus
+@var text font  'Serif font' '"your favorite serif font"'
+==/UserStyle== */
+
+@-moz-document regexp("https?://.*") {
+    i = !important
+
+    // Exclude default code areas.
+    n ?= ':not(code):not(pre):not(pre > span):not(code > span)'
+
+    // Exclude icon fonts.
+    n += ':not([class^="fa"]):not(.i)'
+
+    // Exclude utility classes for fonts.
+    n += ':not(.monospace):not(.text-mono)'
+
+    // Generate.
+    { n } {
+        font-family: font, serif i
+    }
+}
