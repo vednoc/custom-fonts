@@ -1,2 +1,23 @@
+#+STARTUP: nofold
+#+HTML: <div align="center">
+
 * Custom fonts
 Global userstyle that changes base font to your favorite base font.
+
+[[https://github.com/vednoc/custom-fonts/releases][https://img.shields.io/github/v/tag/vednoc/custom-fonts.svg?label=version&style=flat]]
+[[https://github.com/vednoc/custom-fonts/stargazers][https://img.shields.io/github/stars/vednoc/custom-fonts.svg?style=flat]]
+[[https://github.com/vednoc/custom-fonts/network][https://img.shields.io/github/forks/vednoc/custom-fonts.svg?color=007ec6&style=flat]]
+[[https://raw.githubusercontent.com/vednoc/custom-fonts/main/fonts.user.styl][https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg?longCache=true&style=flat]]
+
+#+HTML: </div>
+
+** Installation
+You have to install [[https://add0n.com/stylus.html][Stylus]] and then click on the install link below.
+
+[[https://raw.githubusercontent.com/vednoc/custom-fonts/main/fonts.user.styl][https://img.shields.io/badge/Install%20directly%20with-Stylus-116b59.svg?longCache=true&style=flat]]
+
+** Contributing
+If you have any feature requests, feel free to open an issue.
+
+** License
+Source code released under the [[./license][MIT license]].
