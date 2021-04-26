@@ -37,8 +37,12 @@
     // Feat -> Change base fonts in input areas.
     if inputs {
         n += ':not(input):not(textarea)'
-        input, textarea {
-            font-family: mono, monospace i
+
+        // Workaround for specificity issues.
+        :not(#z) {
+            input, textarea {
+                font-family: mono, monospace i
+            }
         }
     }
 
