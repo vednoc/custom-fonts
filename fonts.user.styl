@@ -9,7 +9,8 @@
 @version      0.1.0
 @license      MIT
 
-@var text font 'Base font' '"your favorite base font"'
+@var text base 'Base font' '"your favorite base font"'
+@var text mono 'Mono font' '"your favorite mono font"'
 @var checkbox inputs 'Use monospace font in input areas' 0
 ==/UserStyle== */
 
@@ -36,11 +37,13 @@
     // Feat -> Change base fonts in input areas.
     if inputs {
         n += ':not(input):not(textarea)'
-        input, textarea { font-family: monospace i }
+        input, textarea {
+            font-family: mono, monospace i
+        }
     }
 
     // Generate.
     { n } {
-        font-family: font, serif i
+        font-family: base, serif i
     }
 }
