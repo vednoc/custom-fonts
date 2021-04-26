@@ -30,6 +30,7 @@
 
     // Exclude code areas on GitLab.
     n += ':not(.diff-line-num):not(pre > code > span span)'
+    n += ':not(.diff-viewer *)' // commit diff
 
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
