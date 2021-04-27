@@ -37,6 +37,7 @@
     // Editors.
     n += ':not(.ace_editor):not(.ace_editor *)' // #2
     n += ':not(.CodeMirror):not(.CodeMirror *)'
+    n += ':not(#squire *)' // protonmail
 
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
@@ -47,7 +48,7 @@
 
         // Workaround for specificity issues.
         :not(#z) {
-            [contenteditable="true"] *, // discord
+            [contenteditable="true"]:not(#squire) *, // discord
             input, textarea {
                 font-family: mono, monospace i
             }
