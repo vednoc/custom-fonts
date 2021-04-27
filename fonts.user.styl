@@ -34,6 +34,9 @@
     n += ':not(.diff-line-num):not(pre > code > span span)'
     n += ':not(.diff-viewer *)' // commit diff
 
+    // Editors.
+    n += ':not(.ace_editor):not(.ace_editor *)' // #2
+
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
 
