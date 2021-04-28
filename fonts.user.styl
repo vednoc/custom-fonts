@@ -40,6 +40,10 @@
     n += ':not(.monaco-editor *)'
     n += ':not(#squire *)' // protonmail
 
+    // Exclude Gmail composer and font menu.
+    n += ':not(div[jsaction][jslog] *)'
+    n += ':not([id][style*="font-family"]):not([id][style*="font-family"] *)'
+
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
 
@@ -47,10 +51,15 @@
     if inputs {
         n += ':not(input):not(textarea)'
 
+        // Gmail elements.
+        $d += ':not([g_editable]):not()'
+        $i += ':not([name="subjectbox"])'
+
         // Workaround for specificity issues.
         :not(#z) {
-            [contenteditable="true"]:not(#squire) *, // discord
-            input, textarea {
+            [contenteditable="true"]{ $d } *, // discord
+            input{ $i },
+            textarea {
                 font-family: mono, monospace i
             }
         }
