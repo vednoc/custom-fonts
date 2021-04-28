@@ -52,8 +52,8 @@
         n += ':not(input):not(textarea)'
 
         // Gmail elements.
-        $d += ':not([g_editable]):not()'
-        $i += ':not([name="subjectbox"])'
+        $d ?= ':not([g_editable])'
+        $i ?= ':not([name="subjectbox"])'
 
         // Workaround for specificity issues.
         :not(#z) {
