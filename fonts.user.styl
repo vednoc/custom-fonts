@@ -22,7 +22,8 @@
     n ?= ':not(code):not(pre):not(pre > span):not(code > span)'
 
     // Exclude icon fonts.
-    n += ':not([class^="fa"]):not(.i):not(.icon)'
+    n += ':not(.i):not(.icon)'
+    n += ':not(.fa):not(.fab):not(.fad):not(.fal):not(.far):not(.fas)'
     n += ':not([class*="octicon-"])' // github
     n += ':not(.glyphicon)' // searx
     n += ':not([aria-hidden=true])' // google meet
