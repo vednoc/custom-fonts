@@ -27,6 +27,7 @@
     n += ':not([class*="octicon-"])' // github
     n += ':not(.glyphicon)' // searx
     n += ':not([aria-hidden=true])' // google meet
+    n += ':not([class*=material-icons])' // material icons
 
     // Exclude code areas on GitHub.
     n += ':not([class^="blob-"]):not([class^="blob-"] > span)'
