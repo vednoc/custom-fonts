@@ -29,6 +29,11 @@
     n += ':not([aria-hidden=true])' // google meet
     n += ':not([class*=material-icons])' // material icons
 
+    // Exclude icons on DuckDuckGo.
+    n += ':not(input[id^="search"][type=submit][value=S])' // search bar
+    n += ':not([class*="js-side-menu-"])' // navbar menu
+    n += ':not(.ddgsi):not(.btn--icon)' // misc icons
+
     // Exclude code areas on GitHub.
     n += ':not([class^="blob-"]):not([class^="blob-"] > span)'
 
