@@ -11,7 +11,45 @@
 @license      MIT
 
 @var text base 'Base font' '"your favorite base font"'
+@var select baseStyle 'Base font style' {
+    'Default*': 'default',
+    'Normal  ': 'normal',
+    'Italic  ': 'italic',
+    'Oblique ': 'oblique',
+}
+@var select baseWeight 'Base font weight' {
+    'Default     *': 'default',
+    '100          ': '100',
+    '200          ': '200',
+    '300          ': '300',
+    '400 (Normal) ': '400',
+    '500          ': '500',
+    '600          ': '600',
+    '700 (Bold)   ': '700',
+    '800          ': '800',
+    '900          ': '900',
+}
+
 @var text mono 'Mono font' '"your favorite mono font"'
+@var select monoStyle 'Mono font style' {
+    'Default*': 'default',
+    'Normal  ': 'normal',
+    'Italic  ': 'italic',
+    'Oblique ': 'oblique',
+}
+@var select monoWeight 'Mono font weight' {
+    'Default     *': 'default',
+    '100          ': '100',
+    '200          ': '200',
+    '300          ': '300',
+    '400 (Normal) ': '400',
+    '500          ': '500',
+    '600          ': '600',
+    '700 (Bold)   ': '700',
+    '800          ': '800',
+    '900          ': '900',
+}
+
 @var checkbox inputs 'Use monospace font in input areas' 0
 ==/UserStyle== */
 
@@ -62,7 +100,7 @@
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
 
-    // Feat -> Change base fonts in input areas.
+    // Feat: change base font in input areas.
     if inputs {
         n += ':not(input):not(textarea)'
 
@@ -76,6 +114,10 @@
             input{ $i },
             textarea {
                 font-family: mono, monospace i
+
+                // Feat: force font style and weight for mono font.
+                font-style:  monoStyle  i if monoStyle  != 'default'
+                font-weight: monoWeight i if monoWeight != 'default'
             }
         }
     }
@@ -83,5 +125,9 @@
     // Generate.
     { n } {
         font-family: base, serif i
+
+        // Feat: force font style and weight for base font.
+        font-style:  baseStyle  i if baseStyle  != 'default'
+        font-weight: baseWeight i if baseWeight != 'default'
     }
 }
