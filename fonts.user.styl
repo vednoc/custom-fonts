@@ -102,7 +102,8 @@
 
     // Feat: change base font in input areas.
     if inputs {
-        n += ':not(input):not(textarea)'
+        // Exclude inputs of button type. #6
+        n += ':not(input:not([type=button])):not(textarea)'
 
         // Gmail elements.
         $d ?= ':not([g_editable])'
