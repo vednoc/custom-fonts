@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         Custom fonts
 @namespace    github.com/vednoc/custom-fonts
-@description  Apply custom base font globally.
+@description  Apply your favorite custom fonts with ease.
 @author       vednoc <vednoc@pm.me> (https://github.com/vednoc)
 @homepageURL  https://github.com/vednoc/custom-fonts
 @supportURL   https://github.com/vednoc/custom-fonts/issues
@@ -50,7 +50,7 @@
     '900          ': '900',
 }
 
-@var checkbox inputs 'Use monospace font in input areas' 0
+@var checkbox inputs 'Use Mono font in input areas' 0
 ==/UserStyle== */
 
 @-moz-document regexp("https?://.*") {
@@ -82,25 +82,25 @@
     n += ':not(.diff-line-num):not(pre > code > span span)'
     n += ':not(.diff-viewer *)' // commit diff
 
-    // Editors.
+    // Exclude various text editors.
     n += ':not(.ace_editor):not(.ace_editor *)' // #2
     n += ':not(.CodeMirror):not(.CodeMirror *)'
     n += ':not(.monaco-editor *)'
     n += ':not(#squire *)' // protonmail
 
-    // Exclude Gmail composer and font menu.
+    // Exclude Gmail composer and font menu. #3
     n += ':not(div[jsaction][jslog] *)'
     n += ':not([id][style*="font-family"]):not([id][style*="font-family"] *)'
 
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
 
-    // Feat: change base font in input areas.
+    // Feat: use mono font in input areas.
     if inputs {
         // Exclude inputs of button type. #6
         n += ':not(input:not([type=button])):not(textarea)'
 
-        // Use monospace input font on Discord.
+        // Use mono input font on Discord.
         n += ':not([data-slate-editor=true] *)'
         n += ':not([class*="channelTextArea-"] *)'
 
