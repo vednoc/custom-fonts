@@ -88,11 +88,6 @@
     n += ':not(.monaco-editor *)'
     n += ':not(#squire *)' // protonmail
 
-    // Use monospace input font on Discord.
-    if inputs {
-        n += ':not([data-slate-editor=true] *)'
-    }
-
     // Exclude Gmail composer and font menu.
     n += ':not(div[jsaction][jslog] *)'
     n += ':not([id][style*="font-family"]):not([id][style*="font-family"] *)'
@@ -109,8 +104,14 @@
         $d ?= ':not([g_editable])'
         $i ?= ':not([name="subjectbox"])'
 
+        // Use monospace input font on Discord.
+        n += ':not([data-slate-editor=true] *)'
+        n += ':not([class*="channelTextArea-"] *)'
+
         // Workaround for specificity issues.
-        :not(#z) {
+        :not(#x):not(#y):not(#z) {
+            // Discord.
+            [class*="channelTextArea-"],
             [contenteditable="true"]{ $d } *,
             input{ $i },
             textarea {
