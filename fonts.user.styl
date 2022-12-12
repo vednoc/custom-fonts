@@ -10,15 +10,15 @@
 @version      0.4.0
 @license      MIT
 
-@var text base 'Base font' '"your favorite base font"'
+@var text base 'Set your favorite Base font' 'null'
 @var select baseStyle 'Base font style' {
-    'Default*': 'default',
+    'Default*': 'null',
     'Normal  ': 'normal',
     'Italic  ': 'italic',
     'Oblique ': 'oblique',
 }
 @var select baseWeight 'Base font weight' {
-    'Default     *': 'default',
+    'Default     *': 'null',
     '100          ': '100',
     '200          ': '200',
     '300          ': '300',
@@ -30,15 +30,15 @@
     '900          ': '900',
 }
 
-@var text mono 'Mono font' '"your favorite mono font"'
+@var text mono 'Set your favorite Mono font' 'null'
 @var select monoStyle 'Mono font style' {
-    'Default*': 'default',
+    'Default*': 'null',
     'Normal  ': 'normal',
     'Italic  ': 'italic',
     'Oblique ': 'oblique',
 }
 @var select monoWeight 'Mono font weight' {
-    'Default     *': 'default',
+    'Default     *': 'null',
     '100          ': '100',
     '200          ': '200',
     '300          ': '300',
@@ -114,21 +114,18 @@
             input:not([name="subjectbox"]):not([type=button]),
 
             textarea {
-                font-family: mono, monospace i
-
-                // Feat: force font style and weight for mono font.
-                font-style:  monoStyle  i if monoStyle  != 'default'
-                font-weight: monoWeight i if monoWeight != 'default'
+                // Feat: set font options if values are not null.
+                font-family: mono       i if mono
+                font-style:  monoStyle  i if monoStyle
+                font-weight: monoWeight i if monoWeight
             }
         }
     }
 
-    // Generate.
+    // Feat: set font options if values are not null.
     { n } {
-        font-family: base, serif i
-
-        // Feat: force font style and weight for base font.
-        font-style:  baseStyle  i if baseStyle  != 'default'
-        font-weight: baseWeight i if baseWeight != 'default'
+        font-family: base       i if base
+        font-style:  baseStyle  i if baseStyle
+        font-weight: baseWeight i if baseWeight
     }
 }
