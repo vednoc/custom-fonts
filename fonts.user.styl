@@ -100,10 +100,6 @@
         // Exclude inputs of button type. #6
         n += ':not(input:not([type=button])):not(textarea)'
 
-        // Gmail elements.
-        $d ?= ':not([g_editable])'
-        $i ?= ':not([name="subjectbox"])'
-
         // Use monospace input font on Discord.
         n += ':not([data-slate-editor=true] *)'
         n += ':not([class*="channelTextArea-"] *)'
@@ -112,8 +108,11 @@
         :not(#x):not(#y):not(#z) {
             // Discord.
             [class*="channelTextArea-"],
-            [contenteditable="true"]{ $d } *,
-            input{ $i },
+
+            // Gmail. #3
+            [contenteditable=true]:not([g_editable]) *,
+            input:not([name="subjectbox"]):not([type=button]),
+
             textarea {
                 font-family: mono, monospace i
 
