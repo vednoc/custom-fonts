@@ -57,7 +57,7 @@
     i = !important
 
     // Exclude default code areas.
-    n ?= ':not(code):not(pre):not(pre > span):not(code > span)'
+    n ?= ':not(code):not(pre):not(pre *):not(pre > code *)'
 
     // Exclude icon fonts.
     n += ':not(.i):not(.icon)'
@@ -76,7 +76,7 @@
     n += ':not(.ddgsi):not(.btn--icon)' // misc icons
 
     // Exclude code areas on GitHub.
-    n += ':not([class^="blob-"]):not([class^="blob-"] span)'
+    n += ':not([class^="blob-"]):not([class^="blob-"] *)'
 
     // Exclude code areas on GitLab.
     n += ':not(.diff-line-num):not(pre > code > span span)'
