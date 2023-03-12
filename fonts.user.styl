@@ -95,6 +95,9 @@
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
 
+    // mathjax
+    n += ':not(mjx-math *)'
+
     // Feat: use mono font in input areas.
     if inputs {
         // Exclude inputs of button type. #6
