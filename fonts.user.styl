@@ -60,7 +60,7 @@
     n ?= ':not(code):not(pre):not(pre > span):not(pre > code *)'
 
     // Exclude icon fonts.
-    n += ':not(.i):not(.icon)'
+    n += ':not(.i):not(.icon):not([class*=icon])'
     n += ':not(.fa):not(.fab):not(.fad):not(.fal):not(.far):not(.fas)'
     n += ':not(.fa-solid):not(.fa-regular):not(.fa-light):not(.fa-duotone):not(.fa-thin):not(.fa-sharp):not(.fa-brands)'
     n += ':not([class*="octicon-"])' // github
