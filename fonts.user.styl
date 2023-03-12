@@ -57,7 +57,7 @@
     i = !important
 
     // Exclude default code areas.
-    n ?= ':not(code):not(pre):not(pre > span):not(pre > code *)'
+    n ?= ':not(code):not(code *):not(pre):not(pre *):not(.pre):not(.pre *)'
 
     // Exclude icon fonts.
     n += ':not(.i):not(.icon)'
