@@ -58,6 +58,7 @@
 
     // Exclude default code areas.
     n ?= ':not(code):not(code *):not(pre):not(pre *):not(.pre):not(.pre *)'
+	c ?= 'code, code *, pre, pre *, .pre, .pre *'
 
     // Exclude icon fonts.
     n += ':not(.i):not(.icon)'
@@ -77,16 +78,22 @@
 
     // Exclude code areas on GitHub.
     n += ':not([class^="blob-"]):not([class^="blob-"] *)'
+    c += ', [class^="blob-"], [class^="blob-"] *'
 
     // Exclude code areas on GitLab.
-    n += ':not(.diff-line-num):not(pre > code > span span)'
+    n += ':not(.diff-line-num)'
     n += ':not(.diff-viewer *)' // commit diff
+    c += ', .diff-line-num, .diff-viewer *'
 
     // Exclude various text editors.
     n += ':not(.ace_editor):not(.ace_editor *)' // #2
+    c += ', .ace_editor, .ace_editor *'
     n += ':not(.CodeMirror):not(.CodeMirror *)'
+    c += ', .CodeMirror, .CodeMirror *'
     n += ':not(.monaco-editor *)'
+    c += ', .monaco-editor *'
     n += ':not(#squire *)' // protonmail
+    c += ', #squire *'
 
     // Exclude Gmail composer and font menu. #3
     n += ':not(div[jsaction][jslog] *)'
@@ -94,6 +101,7 @@
 
     // Exclude utility classes for fonts.
     n += ':not(.monospace):not(.text-mono)'
+   	c += ', .monospace, .text-mono'
 
     // Feat: use mono font in input areas.
     if inputs {
@@ -128,4 +136,10 @@
         font-style:  baseStyle  i if baseStyle
         font-weight: baseWeight i if baseWeight
     }
+
+	{ c } {
+		font-family: mono       i if mono
+		font-style:  monoStyle  i if monoStyle
+		font-weight: monoWeight i if monoWeight
+	}
 }
