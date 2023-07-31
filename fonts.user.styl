@@ -50,85 +50,143 @@
     '900          ': '900',
 }
 
+@var checkbox letterSpacing 'Reset letter-spacing to 0px' 0
+
 @var checkbox inputs 'Use Mono font in input areas' 0
+
+@var checkbox debug 'enable debug colouring' 0
+
 ==/UserStyle== */
 
-@-moz-document regexp("https?://.*") {
-    i = !important
+icons       = ();
+code        = ();
+composer    = ();
+bold        = ();
 
-    // Exclude default code areas.
-    n ?= ':not(code):not(pre):not(pre > span):not(pre > code *)'
+// Exclude default code areas.
+append(code, 'code', 'pre', '.pre');
 
-    // Exclude icon fonts.
-    n += ':not(.i):not(.icon):not([class*=icon])'
-    n += ':not(.fa):not(.fab):not(.fad):not(.fal):not(.far):not(.fas)'
-    n += ':not(.fa-solid):not(.fa-regular):not(.fa-light):not(.fa-duotone):not(.fa-thin):not(.fa-sharp):not(.fa-brands)'
-    n += ':not([class*="octicon-"])' // github
-    n += ':not(.glyphicon)' // searx
-    n += ':not([aria-hidden=true])' // google meet
-    n += ':not([class*=material-icons])' // material icons
-    n += ':not([class*=icofont])' // icofont icons
-    n += ':not([class*=selector__glyph][data-bind])' // fontello icons
+// Exclude icon fonts.
+append(icons, '.i', '.icon', '[class*=icon]');
+append(icons, '.fa', '.fab', '.fad', '.fal', '.far', '.fas');
+append(icons, '.fa-solid', '.fa-regular', '.fa-light', '.fa-duotone', '.fa-thin', '.fa-sharp', '.fa-brands');
+append(icons, '[class*=octicon-]') // github
+append(icons, '.glyphicon') // searx
+append(icons, '[aria-hidden=true]') // google meet
+append(icons, '[class*=material-icons]') // material icons
+append(icons, '[class*=icofont]') // icofont icons
+append(icons, '[class*=selector__glyph][data-bind]') // fontello icons
 
-    // Exclude icons on DuckDuckGo.
-    n += ':not(input[id^="search"][type=submit][value=S])' // search bar
-    n += ':not([class*="js-side-menu-"])' // navbar menu
-    n += ':not(.ddgsi):not(.btn--icon)' // misc icons
+// Exclude icons on DuckDuckGo.
+append(icons, 'input[id^=search][type=submit][value=S]') // search bar
+append(icons, '[class*=js-side-menu-]') // navbar menu
+append(icons, '.ddgsi', '.btn--icon') // misc icons
 
-    // Exclude code areas on GitHub.
-    n += ':not([class^="blob-"]):not([class^="blob-"] *)'
+// Exclude code areas on GitHub.
+append(code, '[class^=blob-]', '.react-code-file-contents', '#read-only-cursor-text-area', '.code-navigation-cursor');
 
-    // Exclude code areas on GitLab.
-    n += ':not(.diff-line-num):not(pre > code > span span)'
-    n += ':not(.diff-viewer *)' // commit diff
+// Exclude code areas on GitLab.
+append(code, '.diff-line-num');
+append(code, '.diff-viewer'); // commit diff
 
-    // Exclude various text editors.
-    n += ':not(.ace_editor):not(.ace_editor *)' // #2
-    n += ':not(.CodeMirror):not(.CodeMirror *)'
-    n += ':not(.monaco-editor *)'
-    n += ':not(#squire *)' // protonmail
+// Exclude various text editors.
+append(code, '.ace_editor') // #2
+append(code, '.CodeMirror');
+append(code, '.monaco-editor');
+append(composer, '#squire') // protonmail
 
-    // Exclude Gmail composer and font menu. #3
-    n += ':not(div[jsaction][jslog] *)'
-    n += ':not([id][style*="font-family"]):not([id][style*="font-family"] *)'
+// Gmail composer and font menu. #3
+append(icon, 'div[jsaction][jslog]', '[id][style*=font-family]');
 
-    // Exclude utility classes for fonts.
-    n += ':not(.monospace):not(.text-mono)'
+// Exclude utility classes for fonts.
+append(code, '.monospace', '.text-mono', '.font-mono', '[class*=monospace]');
 
-    // mathjax
-    n += ':not(mjx-math *)'
+// mathjax
+append(icons, 'mjx-math');
 
-    // Feat: use mono font in input areas.
+// inputs, but not of button type #6
+append(composer, 'textarea', 'input:not([type=button])');
+
+// Discord
+append(composer, '[data-slate-editor=true]', '[class*=channelTextArea-]');
+
+// Gmail #3
+append(composer, '[contenteditable=true]:not([g_editable])');
+append(composer, 'input:not([name="subjectbox"])');
+
+// don't change the weight of headers and bold text
+append(bold, 'strong', 'b', '[class*=bold]', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+
+for split in split('|', join(' *|', icons)) {
+    append(icons, split);
+}
+
+for split in split('|', join(' *|', code)) {
+    append(code, split);
+}
+
+for split in split('|', join(' *|', composer)) {
+    append(composer, split);
+}
+
+for split in split('|', join(' *|', bold)) {
+    append(bold, split);
+}
+
+:not({ unquote(join(', ', icons)) }) {
+    font-family: base                  if base // not !important because rest stops working otherwise
+    font-style:  baseStyle  !important if baseStyle
+    letter-spacing: 0px     !important if letterSpacing
+}
+
+:not({ unquote(join(', ', bold)) }) {
+    font-weight: baseWeight            if baseWeight
+}
+
+{ unquote(join(', ', code)) } {
+    font-family: mono       !important if mono
+    font-style:  monoStyle  !important if monoStyle
+    font-weight: monoWeight            if monoWeight
+    letter-spacing: 0px     !important if letterSpacing
+}
+
+{ unquote(join(', ', composer)) } {
     if inputs {
-        // Exclude inputs of button type. #6
-        n += ':not(input:not([type=button])):not(textarea)'
+        font-family: mono       !important if mono
+        font-style:  monoStyle  !important if monoStyle
+        font-weight: monoWeight            if monoWeight
+        letter-spacing: 0px     !important if letterSpacing
+    } else {
+        font-family: base       !important if base
+        font-style:  baseStyle  !important if baseStyle
+        font-weight: baseWeight            if baseWeight
+        letter-spacing: 0px     !important if letterSpacing
+    }
+}
 
-        // Use mono input font on Discord.
-        n += ':not([data-slate-editor=true] *)'
-        n += ':not([class*="channelTextArea-"] *)'
+if debug {
+    { unquote(join(', ', join(', ', icons), join(', ', code), join(', ', composer))) } {
+        color: #f00 !important
+    }
+}
 
-        // Workaround for specificity issues.
-        :not(#x):not(#y):not(#z) {
-            // Discord.
-            [class*="channelTextArea-"],
-
-            // Gmail. #3
-            [contenteditable=true]:not([g_editable]) *,
-            input:not([name="subjectbox"]):not([type=button]),
-
-            textarea {
-                // Feat: set font options if values are not null.
-                font-family: mono       i if mono
-                font-style:  monoStyle  i if monoStyle
-                font-weight: monoWeight i if monoWeight
-            }
-        }
+@-moz-document regexp('https?://(www\.)?github.com/.*') {
+    { "body > div" } {
+        font-family: mono       !important if mono
+        font-style:  monoStyle  !important if monoStyle
+        font-weight: monoWeight            if monoWeight
+        letter-spacing: 0px     !important if letterSpacing
     }
 
-    // Feat: set font options if values are not null.
-    { n } {
-        font-family: base       i if base
-        font-style:  baseStyle  i if baseStyle
-        font-weight: baseWeight i if baseWeight
+    if debug {
+        .react-code-lines .react-code-text .react-file-line * {
+            // das was man sieht
+            color: #a0ff !important
+        }
+
+        textarea {
+            // der echte Text
+            color: #0f0 !important
+        }
     }
 }
