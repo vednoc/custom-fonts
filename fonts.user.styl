@@ -83,7 +83,7 @@ append(icons, '[class*=js-side-menu-]') // navbar menu
 append(icons, '.ddgsi', '.btn--icon') // misc icons
 
 // Exclude code areas on GitHub.
-append(code, '[class^=blob-]', '.react-code-file-contents', '#read-only-cursor-text-area', '.code-navigation-cursor');
+append(code, '[class^=blob-]', '.react-code-text', '#read-only-cursor-text-area', '.code-navigation-cursor');
 
 // Exclude code areas on GitLab.
 append(code, '.diff-line-num');
@@ -104,15 +104,16 @@ append(code, '.monospace', '.text-mono', '.font-mono', '[class*=monospace]');
 // mathjax
 append(icons, 'mjx-math');
 
-// inputs, but not of button type #6
-append(composer, 'textarea', 'input:not([type=button])');
+append(composer, 'textarea');
 
 // Discord
 append(composer, '[data-slate-editor=true]', '[class*=channelTextArea-]');
 
 // Gmail #3
-append(composer, '[contenteditable=true]:not([g_editable])');
-append(composer, 'input:not([name="subjectbox"])');
+append(composer, '[contenteditable=true]', '[g_editable]');
+
+// inputs, but not of button type #6
+append(composer, 'input:not([name=subjectbox]):not([type=button]):not([type=submit]):not([type=reset])');
 
 // don't change the weight of headers and bold text
 append(bold, 'strong', 'b', '[class*=bold]', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6');
@@ -133,8 +134,8 @@ for split in split('|', join(' *|', bold)) {
     append(bold, split);
 }
 
-:not({ unquote(join(', ', icons)) }) {
-    font-family: base                  if base // not !important because rest stops working otherwise
+:not({ unquote(join(', ', icons)) }):not({ unquote(join(', ', join(', ', code), join(', ', composer))) }) {
+    font-family: base       !important if base // not !important because rest stops working otherwise
     font-style:  baseStyle  !important if baseStyle
     letter-spacing: 0px     !important if letterSpacing
 }
