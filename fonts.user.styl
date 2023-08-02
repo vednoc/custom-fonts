@@ -134,8 +134,9 @@ for split in split('|', join(' *|', bold)) {
     append(bold, split);
 }
 
-:not({ unquote(join(', ', icons)) }):not({ unquote(join(', ', join(', ', code), join(', ', composer))) }) {
-    font-family: base       !important if base // not !important because rest stops working otherwise
+// make sure to include all selectors that get different fonts int the :not
+:not({ unquote(join(', ', join(', ', icons), join(', ', code), join(', ', composer))) }) {
+    font-family: base       !important if base
     font-style:  baseStyle  !important if baseStyle
     letter-spacing: 0px     !important if letterSpacing
 }
