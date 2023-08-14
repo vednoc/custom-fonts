@@ -7,7 +7,7 @@
 @supportURL   https://github.com/vednoc/custom-fonts/issues
 @updateURL    https://userstyles.world/api/style/85.user.css
 @preprocessor stylus
-@version      0.6.0
+@version      0.5.0
 @license      MIT
 
 @var text base 'Set your favorite Base font' 'null'
@@ -53,8 +53,6 @@
 @var checkbox letterSpacing 'Reset letter-spacing to 0px' 0
 
 @var checkbox inputs 'Use Mono font in input areas' 0
-
-@var checkbox debug 'enable debug colouring' 0
 
 ==/UserStyle== */
 
@@ -137,41 +135,38 @@ for split in split('|', join(' *|', bold)) {
     append(bold, split);
 }
 
-// make sure to include all selectors that get different fonts int the :not
-:not({ unquote(join(', ', join(', ', icons), join(', ', code), join(', ', composer), 'body > div')) }) {
-    font-family: base       !important if base
-    font-style:  baseStyle  !important if baseStyle
-    letter-spacing: 0px     !important if letterSpacing
-}
+@-moz-document regexp('(file|https?|(chrome|moz)-extension)://.+') {
 
-:not({ unquote(join(', ', bold)) }) {
-    font-weight: baseWeight            if baseWeight
-}
+    // make sure to include all selectors that get different fonts int the :not
+    :not({ join(', ', join(', ', icons), join(', ', code), join(', ', composer), 'body > div') }) {
+        font-family: base       !important if base
+        font-style:  baseStyle  !important if baseStyle
+        letter-spacing: 0px     !important if letterSpacing
+    }
 
-{ unquote(join(', ', code)) } {
-    font-family: mono       !important if mono
-    font-style:  monoStyle  !important if monoStyle
-    font-weight: monoWeight            if monoWeight
-    letter-spacing: 0px     !important if letterSpacing
-}
+    :not({ join(', ', bold) }) {
+        font-weight: baseWeight            if baseWeight
+    }
 
-{ unquote(join(', ', composer)) } {
-    if inputs {
+    { join(', ', code) } {
         font-family: mono       !important if mono
         font-style:  monoStyle  !important if monoStyle
         font-weight: monoWeight            if monoWeight
         letter-spacing: 0px     !important if letterSpacing
-    } else {
-        font-family: base       !important if base
-        font-style:  baseStyle  !important if baseStyle
-        font-weight: baseWeight            if baseWeight
-        letter-spacing: 0px     !important if letterSpacing
     }
-}
 
-if debug {
-    { unquote(join(', ', join(', ', icons), join(', ', code), join(', ', composer))) } {
-        color: #f00 !important
+    { join(', ', composer) } {
+        if inputs {
+            font-family: mono       !important if mono
+            font-style:  monoStyle  !important if monoStyle
+            font-weight: monoWeight            if monoWeight
+            letter-spacing: 0px     !important if letterSpacing
+        } else {
+            font-family: base       !important if base
+            font-style:  baseStyle  !important if baseStyle
+            font-weight: baseWeight            if baseWeight
+            letter-spacing: 0px     !important if letterSpacing
+        }
     }
 }
 
@@ -181,17 +176,5 @@ if debug {
         font-style:  monoStyle  !important if monoStyle
         font-weight: monoWeight            if monoWeight
         letter-spacing: 0px     !important if letterSpacing
-    }
-
-    if debug {
-        .react-code-lines .react-code-text .react-file-line * {
-            // das was man sieht
-            color: #a0ff !important
-        }
-
-        textarea {
-            // der echte Text
-            color: #0f0 !important
-        }
     }
 }
