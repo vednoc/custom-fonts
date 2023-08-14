@@ -56,18 +56,18 @@
 
 ==/UserStyle== */
 
-icons       = ();
-code        = ();
-composer    = ();
-bold        = ();
+icons       = ()
+code        = ()
+composer    = ()
+bold        = ()
 
 // Exclude default code areas.
-append(code, 'code', 'pre', '.pre');
+append(code, 'code', 'pre', '.pre')
 
 // Exclude icon fonts.
-append(icons, '.i', '.icon', '[class*=icon]');
-append(icons, '.fa', '.fab', '.fad', '.fal', '.far', '.fas');
-append(icons, '.fa-solid', '.fa-regular', '.fa-light', '.fa-duotone', '.fa-thin', '.fa-sharp', '.fa-brands');
+append(icons, '.i', '.icon', '[class*=icon]')
+append(icons, '.fa', '.fab', '.fad', '.fal', '.far', '.fas')
+append(icons, '.fa-solid', '.fa-regular', '.fa-light', '.fa-duotone', '.fa-thin', '.fa-sharp', '.fa-brands')
 append(icons, '[class*=octicon-]') // github
 append(icons, '.glyphicon') // searx
 append(icons, '[aria-hidden=true]') // google meet
@@ -81,58 +81,58 @@ append(icons, '[class*=js-side-menu-]') // navbar menu
 append(icons, '.ddgsi', '.btn--icon') // misc icons
 
 // Exclude code areas on GitHub.
-append(code, '[class^=blob-]', '.react-code-text', '#read-only-cursor-text-area', '.code-navigation-cursor');
+append(code, '[class^=blob-]', '.react-code-text', '#read-only-cursor-text-area', '.code-navigation-cursor')
 
 // Exclude code areas on GitLab.
-append(code, '.diff-line-num');
-append(code, '.diff-viewer'); // commit diff
+append(code, '.diff-line-num')
+append(code, '.diff-viewer') // commit diff
 
 // Exclude various text editors.
 append(code, '.ace_editor') // #2
-append(code, '.CodeMirror');
-append(code, '.monaco-editor');
+append(code, '.CodeMirror')
+append(code, '.monaco-editor')
 append(composer, '#squire') // protonmail
 
 // Gmail composer and font menu. #3
-append(icon, 'div[jsaction][jslog]', '[id][style*=font-family]');
+append(icon, 'div[jsaction][jslog]', '[id][style*=font-family]')
 
 // Exclude utility classes for fonts.
-append(code, '.monospace', '.text-mono', '.font-mono', '[class*=monospace]');
+append(code, '.monospace', '.text-mono', '.font-mono', '[class*=monospace]')
 
 // mathjax
-append(icons, 'mjx-math');
+append(icons, 'mjx-math')
 
-append(composer, 'textarea');
+append(composer, 'textarea')
 
 // Discord
-append(composer, '[data-slate-editor=true]', '[class*=channelTextArea-]');
+append(composer, '[data-slate-editor=true]', '[class*=channelTextArea-]')
 
 // Gmail #3
-append(composer, '[contenteditable=true]', '[g_editable]');
+append(composer, '[contenteditable=true]', '[g_editable]')
 
 // inputs, but not of button type #6
-append(composer, 'input:not([name=subjectbox]):not([type=button]):not([type=submit]):not([type=reset])');
+append(composer, 'input:not([name=subjectbox]):not([type=button]):not([type=submit]):not([type=reset])')
 
 // Github search
 append(composer, '.QueryBuilder-StyledInputContainer')
 
 // don't change the weight of headers and bold text
-append(bold, 'strong', 'b', '[class*=bold]', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+append(bold, 'strong', 'b', '[class*=bold]', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 
 for split in split('|', join(' *|', icons)) {
-    append(icons, split);
+    append(icons, split)
 }
 
 for split in split('|', join(' *|', code)) {
-    append(code, split);
+    append(code, split)
 }
 
 for split in split('|', join(' *|', composer)) {
-    append(composer, split);
+    append(composer, split)
 }
 
 for split in split('|', join(' *|', bold)) {
-    append(bold, split);
+    append(bold, split)
 }
 
 @-moz-document regexp('(file|https?|(chrome|moz)-extension)://.+') {
