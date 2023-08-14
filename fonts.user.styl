@@ -119,21 +119,11 @@ append(composer, '.QueryBuilder-StyledInputContainer')
 // don't change the weight of headers and bold text
 append(bold, 'strong', 'b', '[class*=bold]', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 
-for split in split('|', join(' *|', icons)) {
-    append(icons, split)
-}
-
-for split in split('|', join(' *|', code)) {
-    append(code, split)
-}
-
-for split in split('|', join(' *|', composer)) {
-    append(composer, split)
-}
-
-for split in split('|', join(' *|', bold)) {
-    append(bold, split)
-}
+// Add children elements.
+append(icons, i + ' *') for i in icons
+append(code, i + ' *') for i in code
+append(composer, i + ' *') for i in composer
+append(bold, i + ' *') for i in bold
 
 $bold = join(', ', bold)
 $code = join(', ', code)
