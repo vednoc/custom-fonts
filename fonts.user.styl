@@ -103,7 +103,9 @@ append(icon, 'div[jsaction][jslog]', '[id][style*=font-family]')
 append(code, '.monospace', '.text-mono', '.font-mono', '[class*=monospace]')
 
 // mathjax
-append(icons, 'mjx-math')
+append(icons, 'mjx-math', 'mjx-math *', '.mathjax', '.mathjax *')
+append(icons, '[id^=MathJax_]')
+append(icons, '[class*=MathJax_]', '[class*=MathJax_] *')
 
 // Lightbox. #12
 append(icons, '.fancybox-button')
