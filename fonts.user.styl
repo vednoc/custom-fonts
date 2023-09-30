@@ -62,7 +62,7 @@ composer    = ()
 bold        = ()
 
 // Exclude default code areas.
-append(code, 'code', 'pre', '.pre')
+append(code, 'code', '.code', 'pre', '.pre')
 
 // Exclude icon fonts.
 append(icons, '.i', '.icon', '[class*=icon]')
@@ -81,7 +81,10 @@ append(icons, '[class*=js-side-menu-]') // navbar menu
 append(icons, '.ddgsi', '.btn--icon') // misc icons
 
 // Exclude code areas on GitHub.
-append(code, '[class^=blob-]', '.react-code-text', '#read-only-cursor-text-area', '.code-navigation-cursor')
+append(code, '[class^=blob-]:not([data-rich-type="markup"]):not(:has([data-rich-type="markup"]))', '.react-code-text', '#read-only-cursor-text-area', '.code-navigation-cursor')
+
+// Github gist
+append(code, '.CodeMirror')
 
 // Exclude code areas on GitLab.
 append(code, '.diff-line-num')
