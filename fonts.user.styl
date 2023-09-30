@@ -133,6 +133,12 @@ append(composer, '.QueryBuilder-StyledInputContainer')
 // don't change the weight of headers and bold text
 append(bold, 'strong', 'b', '[class*=bold]', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 
+// LanguageTool overlay, not an Icon but the best alternative
+append(icons, 'lt-div', 'lt-div *')
+
+// Telegram
+append(icons, ".tgico")
+
 // Add children elements.
 append(icons, i + ' *') for i in icons
 append(code, i + ' *') for i in code
