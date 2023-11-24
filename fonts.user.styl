@@ -65,7 +65,9 @@ bold        = ()
 append(code, 'code', '.code', 'pre', '.pre')
 
 // Exclude icon fonts.
+append(icons, 'i', 'icon')
 append(icons, '.i', '.icon', '[class*=icon]')
+append(icons, '[class*=symbol]')
 append(icons, '.fa', '.fab', '.fad', '.fal', '.far', '.fas')
 append(icons, '.fa-solid', '.fa-regular', '.fa-light', '.fa-duotone', '.fa-thin', '.fa-sharp', '.fa-brands')
 append(icons, '[class*=octicon-]') // github
@@ -151,7 +153,6 @@ $icons = join(', ', icons)
 $composer = join(', ', composer)
 
 @-moz-document regexp('(file|https?|(chrome|moz)-extension)://.+') {
-
     // make sure to include all selectors that get different fonts int the :not
     :not({ join(', ', $icons, $code, $composer, 'body > div') }) {
         font-family: base       !important if base
