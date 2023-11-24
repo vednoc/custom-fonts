@@ -62,10 +62,12 @@ composer    = ()
 bold        = ()
 
 // Exclude default code areas.
-append(code, 'code', 'pre', '.pre')
+append(code, 'code', '.code', 'pre', '.pre')
 
 // Exclude icon fonts.
+append(icons, 'i', 'icon')
 append(icons, '.i', '.icon', '[class*=icon]')
+append(icons, '[class*=symbol]')
 append(icons, '.fa', '.fab', '.fad', '.fal', '.far', '.fas')
 append(icons, '.fa-solid', '.fa-regular', '.fa-light', '.fa-duotone', '.fa-thin', '.fa-sharp', '.fa-brands')
 append(icons, '[class*=octicon-]') // github
@@ -81,7 +83,10 @@ append(icons, '[class*=js-side-menu-]') // navbar menu
 append(icons, '.ddgsi', '.btn--icon') // misc icons
 
 // Exclude code areas on GitHub.
-append(code, '[class^=blob-]', '.react-code-text', '#read-only-cursor-text-area', '.code-navigation-cursor')
+append(code, '[class^=blob-]:not([data-rich-type="markup"]):not(:has([data-rich-type="markup"]))', '.react-code-text', '#read-only-cursor-text-area', '.code-navigation-cursor')
+
+// Github gist
+append(code, '.CodeMirror')
 
 // Exclude code areas on GitLab.
 append(code, '.diff-line-num')
@@ -100,7 +105,9 @@ append(icon, 'div[jsaction][jslog]', '[id][style*=font-family]')
 append(code, '.monospace', '.text-mono', '.font-mono', '[class*=monospace]')
 
 // mathjax
-append(icons, 'mjx-math')
+append(icons, 'mjx-math', 'mjx-math *', '.mathjax', '.mathjax *')
+append(icons, '[id^=MathJax_]')
+append(icons, '[class*=MathJax_]', '[class*=MathJax_] *')
 
 // Lightbox. #12
 append(icons, '.fancybox-button')
@@ -117,7 +124,7 @@ append(composer, 'textarea')
 append(composer, '[data-slate-editor=true]', '[class*=channelTextArea-]')
 
 // Gmail #3
-append(composer, '[contenteditable=true]', '[g_editable]')
+append(composer, '[g_editable]') // '[contenteditable=true]'
 
 // inputs, but not of button type #6
 append(composer, 'input:not([name=subjectbox]):not([type=button]):not([type=submit]):not([type=reset])')
@@ -128,8 +135,14 @@ append(composer, '.QueryBuilder-StyledInputContainer')
 // don't change the weight of headers and bold text
 append(bold, 'strong', 'b', '[class*=bold]', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6')
 
+// LanguageTool overlay, not an Icon but the best alternative
+append(icons, 'lt-div', 'lt-div *')
+
+// Telegram
+append(icons, ".tgico")
+
 // Add children elements.
-append(icons, i + ' *') for i in icons
+//append(icons, i + ' *') for i in icons
 append(code, i + ' *') for i in code
 append(composer, i + ' *') for i in composer
 append(bold, i + ' *') for i in bold
@@ -140,7 +153,6 @@ $icons = join(', ', icons)
 $composer = join(', ', composer)
 
 @-moz-document regexp('(file|https?|(chrome|moz)-extension)://.+') {
-
     // make sure to include all selectors that get different fonts int the :not
     :not({ join(', ', $icons, $code, $composer, 'body > div') }) {
         font-family: base       !important if base
